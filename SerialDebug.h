@@ -3,67 +3,71 @@
 
     #if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
 
-        #ifndef SERIAL_DEBUG_SEPARATOR
-            #define SERIAL_DEBUG_SEPARATOR " | "
+		#ifndef SERIAL_DEBUG_IMPL
+            #define SERIAL_DEBUG_IMPL 		Serial
         #endif
 
-        #define SERIAL_DEBUG_SETUP(speed)     Serial.begin(speed)
+		#ifndef SERIAL_DEBUG_SEPARATOR
+            #define SERIAL_DEBUG_SEPARATOR 	" | "
+        #endif
 
-        #define __DEBUG_0()                   Serial.println("### SerialDebug ###")
+		#define SERIAL_DEBUG_SETUP(speed)	SERIAL_DEBUG_IMPL.begin(speed)
 
-        #define __DEBUG_1(A)                  Serial.println(A)
+        #define __DEBUG_0()                   SERIAL_DEBUG_IMPL.println("### SerialDebug ###")
 
-        #define __DEBUG_2(A,B)                Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(B)
+        #define __DEBUG_1(A)                  SERIAL_DEBUG_IMPL.println(A)
 
-        #define __DEBUG_3(A,B,C)              Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(C)
+        #define __DEBUG_2(A,B)                SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(B)
 
-        #define __DEBUG_4(A,B,C,D)            Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(C);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(D)
+        #define __DEBUG_3(A,B,C)              SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(C)
 
-        #define __DEBUG_5(A,B,C,D,E)          Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(C);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(D);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(E)
+        #define __DEBUG_4(A,B,C,D)            SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(C);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(D)
 
-        #define __DEBUG_6(A,B,C,D,E,F)        Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(C);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(D);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(E);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(F)
+        #define __DEBUG_5(A,B,C,D,E)          SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(C);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(D);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(E)
 
-        #define __DEBUG_7(A,B,C,D,E,F,G)      Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(C);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(D);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(E);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(F);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(G)
+        #define __DEBUG_6(A,B,C,D,E,F)        SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(C);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(D);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(E);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(F)
 
-        #define __DEBUG_8(A,B,C,D,E,F,G,H)    Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(C);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(D);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(E);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(F);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(G);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(H)
+        #define __DEBUG_7(A,B,C,D,E,F,G)      SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(C);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(D);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(E);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(F);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(G)
 
-        #define __DEBUG_9(A,B,C,D,E,F,G,H,I)  Serial.print(A);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(B);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(C);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(D);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(E);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(F);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(G);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.print(H);Serial.print(SERIAL_DEBUG_SEPARATOR);\
-                                              Serial.println(I)
+        #define __DEBUG_8(A,B,C,D,E,F,G,H)    SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(C);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(D);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(E);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(F);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(G);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(H)
+
+        #define __DEBUG_9(A,B,C,D,E,F,G,H,I)  SERIAL_DEBUG_IMPL.print(A);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(B);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(C);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(D);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(E);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(F);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(G);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.print(H);SERIAL_DEBUG_IMPL.print(SERIAL_DEBUG_SEPARATOR);\
+                                              SERIAL_DEBUG_IMPL.println(I)
 
         #define __DEBUG_X(x,A,B,C,D,E,F,G,H,I,MACRO, ...) MACRO
 
