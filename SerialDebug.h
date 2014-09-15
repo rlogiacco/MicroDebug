@@ -4,14 +4,14 @@
     #if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
 
 		#ifndef SERIAL_DEBUG_IMPL
-            #define SERIAL_DEBUG_IMPL 		Serial
+            #define SERIAL_DEBUG_IMPL         Serial
         #endif
 
 		#ifndef SERIAL_DEBUG_SEPARATOR
-            #define SERIAL_DEBUG_SEPARATOR 	" | "
+            #define SERIAL_DEBUG_SEPARATOR    " | "
         #endif
 
-		#define SERIAL_DEBUG_SETUP(speed)	SERIAL_DEBUG_IMPL.begin(speed)
+		#define SERIAL_DEBUG_SETUP(speed)     SERIAL_DEBUG_IMPL.begin(speed)
 
         #define __DEBUG_0()                   SERIAL_DEBUG_IMPL.println("### SerialDebug ###")
 
