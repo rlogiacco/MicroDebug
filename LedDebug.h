@@ -23,7 +23,7 @@
                                           }\
                                           delay(LED_DEBUG_DELAY)
         
-        #define __PULSE_DEF(NUM)          PULSE_LNG(NUM, LED_DEBUG_LENGHT)
+        #define __PULSE_DEF(NUM)          __PULSE_LNG(NUM, LED_DEBUG_LENGHT)
         
         #define __PULSE_ONE()             digitalWrite(LED_DEBUG_PIN, HIGH);\
                                           delay(LED_DEBUG_LENGHT);\
