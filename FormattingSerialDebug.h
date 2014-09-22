@@ -2,6 +2,7 @@
 #define __SERIAL_DEBUG__
 
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
+        #include<stdio.h>
 
 /*
  * d, i	int as a signed decimal number. '%d' and '%i' are synonymous for output, but are different when used with scanf() for input (where using %i will interpret a number as hexadecimal if it's preceded by 0x, and octal if it's preceded by 0.)
@@ -21,33 +22,14 @@
 		#ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-#include<stdio.h>
 		int serial_putc(char c, FILE *) { SERIAL_DEBUG_IMPL.write(c); return c; }
 
 		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &serial_putc, 0 )
 
-        #define __DEBUG_() printf("### SerialDebug ###")
-        #define __DEBUG_0(A)  printf(A)
-        #define __DEBUG_1(A,B)  printf(A,B)
-        #define __DEBUG_2(A,B,C)  printf(A,B,C)
-        #define __DEBUG_3(A,B,C,D)  printf(A,B,C,D)
-        #define __DEBUG_4(A,B,C,D,E)  printf(A,B,C,D,E)
-        #define __DEBUG_5(A,B,C,D,E,F)  printf(A,B,C,D,E,F)
-        #define __DEBUG_6(A,B,C,D,E,F,G)  printf(A,B,C,D,E,F,G)
-        #define __DEBUG_7(A,B,C,D,E,F,G,H)  printf(A,B,C,D,E,F,G,H)
-        #define __DEBUG_8(A,B,C,D,E,F,G,H,I)  printf(A,B,C,D,E,F,G,H,I)
-
-        #define __DEBUG_X(x,A,B,C,D,E,F,G,H,I,MACRO, ...) MACRO;printf("\r\n")
-
-        #define DEBUG(...)          __DEBUG_X(,##__VA_ARGS__,\
-										__DEBUG_8(__VA_ARGS__),__DEBUG_7(__VA_ARGS__),\
-										__DEBUG_6(__VA_ARGS__),__DEBUG_5(__VA_ARGS__),__DEBUG_4(__VA_ARGS__),\
-										__DEBUG_3(__VA_ARGS__),__DEBUG_2(__VA_ARGS__),__DEBUG_1(__VA_ARGS__),\
-										__DEBUG_0(__VA_ARGS__),__DEBUG_(__VA_ARGS__)\
-									)
+        #define DEBUG(format, ...)  printf(format "\r\n", ##__VA_ARGS__)
 
     #else
-        #define DEBUG(...)
+        #define DEBUG(format, ...)
         #define SERIAL_DEBUG_SETUP(speed)
     #endif // SERIAL_DEBUG
 #endif //__SERIAL_DEBUG__
