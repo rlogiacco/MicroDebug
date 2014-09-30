@@ -15,16 +15,16 @@
  * s	null-terminated string.
  * c	char (character).
  * p	void * (pointer to void) in an implementation-defined format.
- * a, A	double in hexadecimal notation, starting with "0x" or "0X". 'a' uses lower-case letters, 'A' uses upper-case letters.[7][8] (C++11 iostreams have a hexfloat that works the same).
+ * a, A	double in hexadecimal notation, starting with "0x" or "0X". 'a' uses lower-case letters, 'A' uses upper-case letters.
  * n	Print nothing, but write number of characters successfully written so far into an integer pointer parameter.
  * %	a literal '%' character (this type doesn't accept any flags, width, precision or length).
  */
 		#ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-		int serial_putc(char c, FILE *) { SERIAL_DEBUG_IMPL.write(c); return c; }
+		int _serialDebug(char c, FILE *) { SERIAL_DEBUG_IMPL.write(c); return c; }
 
-		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &serial_putc, 0 )
+		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 
         #define DEBUG(format, ...)  printf(format "\r\n", ##__VA_ARGS__)
 
