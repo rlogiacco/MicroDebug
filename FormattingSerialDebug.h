@@ -2,7 +2,8 @@
 #define __SERIAL_DEBUG__
 
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
-        #include<stdio.h>
+        #include <Arduino.h>
+        #include <stdio.h>
 
 /*
  * d, i	int as a signed decimal number. '%d' and '%i' are synonymous for output, but are different when used with scanf() for input (where using %i will interpret a number as hexadecimal if it's preceded by 0x, and octal if it's preceded by 0.)
@@ -22,9 +23,9 @@
 		#ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-		int _serialDebug(char c, FILE *) { SERIAL_DEBUG_IMPL.write(c); return c; }
+		int _serialDebugX(char c, FILE *) { SERIAL_DEBUG_IMPL.write(c); return c; }
 
-		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
+		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebugX, 0 )
 
         #define DEBUG(format, ...)  printf(format "\r\n", ##__VA_ARGS__)
 
