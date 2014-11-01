@@ -44,7 +44,7 @@
 		#ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-		int _serialDebug(char c, FILE *) { SERIAL_DEBUG_IMPL.write(c); return c; }
+		int _serialDebug(char c, FILE * file);
 
 		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 
