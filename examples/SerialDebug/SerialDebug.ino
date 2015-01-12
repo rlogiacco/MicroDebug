@@ -7,7 +7,7 @@
 
 void setup() {
 	SERIAL_DEBUG_SETUP(9600);
-
+	DEBUG(FREE_RAM);
 	pinMode(A0, INPUT);
 }
 

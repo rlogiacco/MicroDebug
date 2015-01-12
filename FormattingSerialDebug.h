@@ -20,6 +20,9 @@
 #ifndef __SERIAL_DEBUG__
 #define __SERIAL_DEBUG__
 
+    #define FREE_RAM (uint16_t)(RAMEND - size_t (__malloc_heap_start))
+    #define FREE_RAM_PERCENT (uint8_t)((uint32_t)FREE_RAM * 100 / (RAMEND - RAMSTART + 1))
+
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
         #include <Arduino.h>
         #include <stdio.h>
@@ -41,12 +44,12 @@
  * n	Print nothing, but write number of characters successfully written so far into an integer pointer parameter.
  * %	a literal '%' character (this type doesn't accept any flags, width, precision or length).
  */
-		#ifndef SERIAL_DEBUG_IMPL
+        #ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-		int _serialDebug(char c, FILE * file);
+        int _serialDebug(char c, FILE * file);
 
-		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
+        #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 
         #define DEBUG(format, ...)  printf(format "\r\n", ##__VA_ARGS__)
 
