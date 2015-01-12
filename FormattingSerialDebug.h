@@ -44,6 +44,7 @@
  * n	Print nothing, but write number of characters successfully written so far into an integer pointer parameter.
  * %	a literal '%' character (this type doesn't accept any flags, width, precision or length).
  */
+
         #ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
