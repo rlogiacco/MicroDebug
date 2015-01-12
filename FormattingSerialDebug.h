@@ -21,7 +21,6 @@
 #define __SERIAL_DEBUG__
 
     #define FREE_RAM (uint16_t)(RAMEND - size_t (__malloc_heap_start))
-    #define FREE_RAM_PERCENT (uint8_t)((uint32_t)FREE_RAM * 100 / (RAMEND - RAMSTART + 1))
 
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
         #include <Arduino.h>
@@ -49,10 +48,13 @@
             #define SERIAL_DEBUG_IMPL Serial
         #endif
         int _serialDebug(char c, FILE * file);
+        #ifdef F
+        void printf(const __FlashStringHelper *format, ...);
+        #endif
 
         #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 
-        #define DEBUG(format, ...)  printf(format "\r\n", ##__VA_ARGS__)
+        #define DEBUG(format, ...) printf(format, ##__VA_ARGS__);SERIAL_DEBUG_IMPL.println()
 
     #else
         #define DEBUG(format, ...)

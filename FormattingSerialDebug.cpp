@@ -18,6 +18,24 @@
  */
 #include <FormattingSerialDebug.h>
 
+#if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
 int _serialDebug(char c, FILE * file) {
-	SERIAL_DEBUG_IMPL.write(c); return c;
+	SERIAL_DEBUG_IMPL.write(c);
+	return c;
 }
+
+#ifdef F
+void printf(const __FlashStringHelper *format, ...) {
+	char buffer[256];
+	va_list args;
+	va_start(args, format);
+#ifdef __AVR__
+	vsnprintf_P(buffer, sizeof(buffer), (const char *)format, args); // progmem for AVR
+#else
+	vsnprintf(buffer, sizeof(buffer), (const char *)format, args); // for the rest of the world
+#endif
+	va_end(args);
+	SERIAL_DEBUG_IMPL.print(buffer);
+}
+#endif
+#endif

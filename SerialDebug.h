@@ -21,7 +21,6 @@
 #define __SERIAL_DEBUG__
 
     #define FREE_RAM (uint16_t)(RAMEND - size_t (__malloc_heap_start))
-    #define FREE_RAM_PERCENT (uint8_t)((uint32_t)FREE_RAM * 100 / (RAMEND - RAMSTART + 1))
 
     #if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
 

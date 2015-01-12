@@ -4,7 +4,7 @@
 
 void setup() {
 	SERIAL_DEBUG_SETUP(9600);
-	DEBUG("Free memory is %u bytes which is %u%% of the total", FREE_RAM, FREE_RAM_PERCENT);
+	DEBUG("Free memory is %u bytes", FREE_RAM);
 	pinMode(A0, INPUT);
 }
 
