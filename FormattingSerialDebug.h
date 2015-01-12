@@ -41,12 +41,12 @@
  * n	Print nothing, but write number of characters successfully written so far into an integer pointer parameter.
  * %	a literal '%' character (this type doesn't accept any flags, width, precision or length).
  */
-		#ifndef SERIAL_DEBUG_IMPL
+	#ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-		int _serialDebug(char c, FILE * file);
+	int _serialDebug(char c, FILE * file);
 
-		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
+	#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 
         #define DEBUG(format, ...)  printf(format "\r\n", ##__VA_ARGS__)
 
