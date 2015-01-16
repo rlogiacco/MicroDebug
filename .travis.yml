@@ -1,11 +1,3 @@
-language: python
-install: 
- - gem install fpm
- - wget --output-document arduino-ide.tgz http://arduino.cc/download.php?f=/arduino-1.5.8-linux64.tgz
- - sudo tar xzf arduino-ide.tgz -C /opt
- - git clone -q https://github.com/BrianAdams/hwci-scripts ../hwci-scripts && ../hwci-scripts/bin/setup.sh
- - sudo apt-get install cppcheck
-
 language: cpp
 compiler:
  - gcc
@@ -31,12 +23,6 @@ script:
  - /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-gcc --version
  - ino build -m ${MODEL}
  
-#script:
-# - ls -la
-# - "   env USER_LIB_PATH=$PWD/../ ARDUINO_DIR=/opt/arduino-${ARDUINO_IDE_VERSION} ../hwci-scripts/bin/arduino_make.sh -C ${FOLDER} && echo pass:$e >> results || echo fail:$e >> results "
-# - cat results
-# - 'cut -d: -f1 results | sort | uniq -c'
-# - test `grep -c fail results` -eq 0
 env:
  - MODEL=mega2560
 # - FOLDER=examples/FormattingSerialDebug
