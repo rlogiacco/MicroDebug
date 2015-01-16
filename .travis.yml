@@ -2,13 +2,13 @@ language: cpp
 compiler:
  - gcc
 before_install:
- - wget --output-document arduino-ide.tgz http://arduino.cc/download.php?f=/arduino-${ARDUINO_IDE_VERSION}-linux64.tgz
+ - wget --output-document arduino-ide.tgz http://arduino.cc/download.php?f=/arduino-1.5.8-linux64.tgz
  - sudo apt-get install aptitude
  - sudo aptitude update
 install:
  - ls -alF
  - tar -xvf arduino-ide.tgz
- - sudo mv arduino-${ARDUINO_IDE_VERSION}/ /usr/local/share/arduino
+ - sudo mv arduino-1.5.8/ /usr/local/share/arduino
  - sudo aptitude -y install ia32-libs
  - git clone -b ide1.5x https://github.com/justonia/ino.git
  - cd ino && sudo make install && cd ../
