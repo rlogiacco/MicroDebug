@@ -8,14 +8,15 @@ install:
 
 script:
  - ls -la
- - "   env USER_LIB_PATH=$PWD/../ ARDUINO_DIR=/opt/arduino-${ARDUINO_IDE_VERSION} ../hwci-scripts/bin/arduino_make.sh -C ${MAIN_CLASS} && echo pass:$e >> results || echo fail:$e >> results "
+ - "   env USER_LIB_PATH=$PWD/../ ARDUINO_DIR=/opt/arduino-${ARDUINO_IDE_VERSION} ../hwci-scripts/bin/arduino_make.sh -C ${FOLDER} && echo pass:$e >> results || echo fail:$e >> results "
  - cat results
  - 'cut -d: -f1 results | sort | uniq -c'
  - test `grep -c fail results` -eq 0
 env:
- - MAIN_CLASS=SerialDebug.cpp
- - MAIN_CLASS=FormattingSerialDebug.cpp
- - MAIN_CLASS=LedDebug.cpp
+ - FOLDER=.
+ - FOLDER=examples/FormattingSerialDebug
+ - FOLDER=examples/SerialDebug
+ - FOLDER=examples/LedDebug
 
 global:
  - ARDUINO_IDE_VERSION='1.5.8'
