@@ -6,21 +6,46 @@ install:
  - git clone -q https://github.com/BrianAdams/hwci-scripts ../hwci-scripts && ../hwci-scripts/bin/setup.sh
  - sudo apt-get install cppcheck
 
+language: cpp
+compiler:
+ - gcc
+before_install:
+ - wget --output-document arduino-ide.tgz http://arduino.cc/download.php?f=/arduino-${ARDUINO_IDE_VERSION}-linux64.tgz
+ - sudo apt-get install aptitude
+ - sudo aptitude update
+install:
+ - ls -alF
+ - tar -xvf arduino-ide.tgz
+ - sudo mv arduino-${ARDUINO_IDE_VERSION}/ /usr/local/share/arduino
+ - sudo aptitude -y install ia32-libs
+ - git clone -b ide1.5x https://github.com/justonia/ino.git
+ - cd ino && sudo make install && cd ../
+ - sudo pip install jinja2
+ - sudo pip install pyserial
+ - pwd
+
 script:
- - ls -la
- - "   env USER_LIB_PATH=$PWD/../ ARDUINO_DIR=/opt/arduino-${ARDUINO_IDE_VERSION} ../hwci-scripts/bin/arduino_make.sh -C ${FOLDER} && echo pass:$e >> results || echo fail:$e >> results "
- - cat results
- - 'cut -d: -f1 results | sort | uniq -c'
- - test `grep -c fail results` -eq 0
+ - ino --help
+ - file /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin
+ - ls -alF /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin
+ - /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-gcc --version
+ - ino build -m ${MODEL}
+ 
+#script:
+# - ls -la
+# - "   env USER_LIB_PATH=$PWD/../ ARDUINO_DIR=/opt/arduino-${ARDUINO_IDE_VERSION} ../hwci-scripts/bin/arduino_make.sh -C ${FOLDER} && echo pass:$e >> results || echo fail:$e >> results "
+# - cat results
+# - 'cut -d: -f1 results | sort | uniq -c'
+# - test `grep -c fail results` -eq 0
 env:
- - FOLDER=.
- - FOLDER=examples/FormattingSerialDebug
- - FOLDER=examples/SerialDebug
- - FOLDER=examples/LedDebug
+ - MODEL=mega2560
+# - FOLDER=examples/FormattingSerialDebug
+# - FOLDER=examples/SerialDebug
+# - FOLDER=examples/LedDebug
 
 global:
  - ARDUINO_IDE_VERSION='1.5.8'
 
-notifications:
-  email:
-  - rlogiacco@gmail.com
+#notifications:
+#  email:
+#  - rlogiacco@gmail.com
