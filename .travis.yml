@@ -12,6 +12,9 @@ script:
  - 'cut -d: -f1 results | sort | uniq -c'
  - test `grep -c fail results` -eq 0
 env:
+ - MAIN_CLASS=SerialDebug.cpp
+ - MAIN_CLASS=FormattingSerialDebug.cpp
+ - MAIN_CLASS=LedDebug.cpp
+
  global:
   - ARDUINO_IDE_VERSION='1.5.8'
-  - MAIN_CLASS=SerialDebug
