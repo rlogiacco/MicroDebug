@@ -16,5 +16,5 @@ env:
  - MAIN_CLASS=FormattingSerialDebug.cpp
  - MAIN_CLASS=LedDebug.cpp
 
- global:
-  - ARDUINO_IDE_VERSION='1.5.8'
+global:
+ - ARDUINO_IDE_VERSION='1.5.8'
