@@ -6,21 +6,17 @@ before_install:
  - sudo apt-get install aptitude
  - sudo aptitude update
 install:
- - ls -alF
- - tar -xvf arduino-ide.tgz
+ - tar -xf arduino-ide.tgz
  - sudo mv arduino-1.5.8/ /usr/local/share/arduino
  - sudo aptitude -y install ia32-libs
  - git clone -b ide1.5x https://github.com/justonia/ino.git
  - cd ino && sudo make install && cd ../
  - sudo pip install jinja2
  - sudo pip install pyserial
- - pwd
 
 script:
- - ino --help
- - file /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin
- - ls -alF /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin
- - /usr/local/share/arduino/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-gcc --version
+ - ino init -t test
+ - ls test
  - ino build -m ${MODEL}
  
 env:
