@@ -16,7 +16,10 @@ install:
 
 script:
  - pwd
+ - mkdir test
+ - cd test
  - ino init
+ - ls
  - ino build -m ${MODEL}
  
 env:
