@@ -6,7 +6,7 @@
 MCU = atmega8
 FORMAT = ihex
 TARGET = demo
-SRC = $(TARGET).cpp
+SRC = $(TARGET).*
 ASRC = 
 OPT = s
 
