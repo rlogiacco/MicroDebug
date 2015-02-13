@@ -15,6 +15,8 @@ install:
  - sudo pip install pyserial
 
 script:
+ - pwd
+ - ino --help
  - ino init -t test
  - ls test
  - ino build -m ${MODEL}
