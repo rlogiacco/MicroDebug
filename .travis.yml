@@ -1,51 +1,10 @@
-language: cpp
-compiler:
- - gcc
+language: c
 before_install:
- - wget --output-document arduino-ide.tgz http://arduino.cc/download.php?f=/arduino-1.5.8-linux64.tgz
- - sudo apt-get install aptitude
- - sudo aptitude update
+ - sudo apt-get update -qq
 install:
- - tar -xf arduino-ide.tgz
- - sudo mv arduino-1.5.8/ /usr/local/share/arduino
- - sudo aptitude -y install ia32-libs
- - git clone -b ide1.5x https://github.com/justonia/ino.git
- - cd ino && sudo make install && cd ../
- - sudo pip install jinja2
- - sudo pip install pyserial
-
-script:
- - mkdir src
- - mv * src -Rf
- - ino build -m ${MODEL}
- 
-env:
- - MODEL=arduino_due_x
- - MODEL=yun
- - MODEL=uno
- - MODEL=diecimila
- - MODEL=nano
- - MODEL=mega
- - MODEL=megaADK
- - MODEL=leonardo
- - MODEL=micro
- - MODEL=esplora
- - MODEL=mini
- - MODEL=ethernet
- - MODEL=fio
- - MODEL=bt
- - MODEL=LilyPadUSB
- - MODEL=lilypad
- - MODEL=pro
- - MODEL=atmegang
- - MODEL=robotControl
- - MODEL=robotMotor
-# - FOLDER=examples/FormattingSerialDebug
-# - FOLDER=examples/SerialDebug
-# - FOLDER=examples/LedDebug
-
-global:
- - ARDUINO_IDE_VERSION='1.5.8'
+ - sudo apt-get install -qq gcc-avr binutils-avr avr-libc
+script: 
+ - make MCU=atmega32
 
 #notifications:
 #  email:
