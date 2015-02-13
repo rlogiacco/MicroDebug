@@ -15,15 +15,31 @@ install:
  - sudo pip install pyserial
 
 script:
- - pwd
- - mkdir test
- - cd test
- - ino init
- - ls
+ - mkdir src
+ - mv * src -Rf
  - ino build -m ${MODEL}
  
 env:
- - MODEL=mega2560
+ - MODEL=arduino_due_x
+ - MODEL=yun
+ - MODEL=uno
+ - MODEL=diecimila
+ - MODEL=nano
+ - MODEL=mega
+ - MODEL=megaADK
+ - MODEL=leonardo
+ - MODEL=micro
+ - MODEL=esplora
+ - MODEL=mini
+ - MODEL=ethernet
+ - MODEL=fio
+ - MODEL=bt
+ - MODEL=LilyPadUSB
+ - MODEL=lilypad
+ - MODEL=pro
+ - MODEL=atmegang
+ - MODEL=robotControl
+ - MODEL=robotMotor
 # - FOLDER=examples/FormattingSerialDebug
 # - FOLDER=examples/SerialDebug
 # - FOLDER=examples/LedDebug
