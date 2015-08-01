@@ -10,7 +10,6 @@ before_install:
 install:
   - ls
   - ln -s $PWD /usr/local/share/arduino/libraries/MicroDebug
-  - arduino --install-library MicroDebug
 script:
   - arduino --verify --board arduino:avr:uno $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
   - arduino --verify --board arduino:avr:uno $PWD/examples/LedDebug/LedDebug.ino
