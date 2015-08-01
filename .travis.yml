@@ -13,9 +13,9 @@ install:
   - ln -s $PWD /usr/local/share/arduino/libraries/MicroDebug
   
 script:
-  - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
-  - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/LedDebug/LedDebug.ino
-  - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/SerialDebug/SerialDebug.ino
+  - arduino --verify --board ${BOARD} $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
+  - arduino --verify --board ${BOARD} $PWD/examples/LedDebug/LedDebug.ino
+  - arduino --verify --board ${BOARD} $PWD/examples/SerialDebug/SerialDebug.ino
   
 notifications:
   email:
@@ -23,22 +23,22 @@ notifications:
     on_failure: change
     
 env:
- - PLATFORM=arduino:avr:uno
- - PLATFORM=arduino:avr:yun
-# - PLATFORM=arduino:avr:diecimila
- - PLATFORM=arduino:avr:nano:cpu=atmega168
- - PLATFORM=arduino:avr:nano:cpu=atmega328
-# - PLATFORM=arduino:avr:mega
- - PLATFORM=arduino:avr:megaADK
- - PLATFORM=arduino:avr:leonardo
- - PLATFORM=arduino:avr:micro
- - PLATFORM=arduino:avr:esplora
- - PLATFORM=arduino:avr:mini:cpu=atmega168
- - PLATFORM=arduino:avr:mini:cpu=atmega328
- - PLATFORM=arduino:avr:ethernet
-# - PLATFORM=arduino:avr:bt
-# - PLATFORM=arduino:avr:lilypad
- - PLATFORM=arduino:avr:pro:cpu=atmega168
- - PLATFORM=arduino:avr:pro:cpu=atmega328
-# - PLATFORM=arduino:avr:gemma
- - PLATFORM=arduino:sam:arduino_due_x
+ - BOARD=arduino:avr:uno
+ - BOARD=arduino:avr:yun
+# - BOARD=arduino:avr:diecimila
+ - BOARD=arduino:avr:nano:cpu=atmega168
+ - BOARD=arduino:avr:nano:cpu=atmega328
+# - BOARD=arduino:avr:mega
+ - BOARD=arduino:avr:megaADK
+ - BOARD=arduino:avr:leonardo
+ - BOARD=arduino:avr:micro
+ - BOARD=arduino:avr:esplora
+ - BOARD=arduino:avr:mini:cpu=atmega168
+ - BOARD=arduino:avr:mini:cpu=atmega328
+ - BOARD=arduino:avr:ethernet
+# - BOARD=arduino:avr:bt
+# - BOARD=arduino:avr:lilypad
+ - BOARD=arduino:avr:pro:cpu=atmega168
+ - BOARD=arduino:avr:pro:cpu=atmega328
+# - BOARD=arduino:avr:gemma
+ - BOARD=arduino:sam:arduino_due_x
