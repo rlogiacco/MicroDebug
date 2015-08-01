@@ -25,10 +25,12 @@ notifications:
 env:
  - BOARD=arduino:avr:uno
  - BOARD=arduino:avr:yun
-# - BOARD=arduino:avr:diecimila
+ - BOARD=arduino:avr:diecimila:cpu=atmega168
+ - BOARD=arduino:avr:diecimila:cpu=atmega328
  - BOARD=arduino:avr:nano:cpu=atmega168
  - BOARD=arduino:avr:nano:cpu=atmega328
-# - BOARD=arduino:avr:mega
+ - BOARD=arduino:avr:mega:cpu=atmega1280
+ - BOARD=arduino:avr:mega:cpu=atmega2560
  - BOARD=arduino:avr:megaADK
  - BOARD=arduino:avr:leonardo
  - BOARD=arduino:avr:micro
@@ -36,9 +38,10 @@ env:
  - BOARD=arduino:avr:mini:cpu=atmega168
  - BOARD=arduino:avr:mini:cpu=atmega328
  - BOARD=arduino:avr:ethernet
-# - BOARD=arduino:avr:bt
-# - BOARD=arduino:avr:lilypad
+ - BOARD=arduino:avr:bt:cpu=atmega168
+ - BOARD=arduino:avr:bt:cpu=atmega328
+ - BOARD=arduino:avr:lilypad:cpu=atmega168
+ - BOARD=arduino:avr:lilypad:cpu=atmega328
  - BOARD=arduino:avr:pro:cpu=atmega168
  - BOARD=arduino:avr:pro:cpu=atmega328
-# - BOARD=arduino:avr:gemma
  - BOARD=arduino:sam:arduino_due_x
