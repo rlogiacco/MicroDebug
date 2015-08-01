@@ -1,4 +1,4 @@
-MicroDebug
+MicroDebug   [![Build Status](https://travis-ci.org/rlogiacco/MicroDebug.svg?branch=master)](https://travis-ci.org/rlogiacco/MicroDebug)
 ============
 
 Whenever you run your projects you want to have some feedback of what's happening on your board, but most of the times you don't want those *debug* instructions to get into your production code, especially considering the limits in the micro controllers memory capacity.
