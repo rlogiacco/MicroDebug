@@ -1,4 +1,5 @@
 language: c
+
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
@@ -7,32 +8,37 @@ before_install:
   - tar xf arduino-1.6.5-linux64.tar.xz
   - sudo mv arduino-1.6.5 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
+  
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/MicroDebug
+  
 script:
   - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
   - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/LedDebug/LedDebug.ino
   - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/SerialDebug/SerialDebug.ino
+  
 notifications:
   email:
     on_success: change
     on_failure: change
+    
 env:
- - MODEL=uno
- - MODEL=yun
- - MODEL=diecimila
- - MODEL=nano
- - MODEL=mega
- - MODEL=megaADK
- - MODEL=leonardo
- - MODEL=micro
- - MODEL=esplora
- - MODEL=mini
- - MODEL=ethernet
- - MODEL=bt
- - MODEL=lilypad
- - MODEL=pro
- - MODEL=gemma
-#notifications:
-#  email:
-#  - rlogiacco@gmail.com
+ - PLATFORM=arduino:avr:uno
+ - PLATFORM=arduino:avr:yun
+# - PLATFORM=arduino:avr:diecimila
+ - PLATFORM=arduino:avr:nano:cpu=atmega168
+ - PLATFORM=arduino:avr:nano:cpu=atmega328
+# - PLATFORM=arduino:avr:mega
+ - PLATFORM=arduino:avr:megaADK
+ - PLATFORM=arduino:avr:leonardo
+ - PLATFORM=arduino:avr:micro
+ - PLATFORM=arduino:avr:esplora
+ - PLATFORM=arduino:avr:mini:cpu=atmega168
+ - PLATFORM=arduino:avr:mini:cpu=atmega328
+ - PLATFORM=arduino:avr:ethernet
+# - PLATFORM=arduino:avr:bt
+# - PLATFORM=arduino:avr:lilypad
+ - PLATFORM=arduino:avr:pro:cpu=atmega168
+ - PLATFORM=arduino:avr:pro:cpu=atmega328
+# - PLATFORM=arduino:avr:gemma
+ - PLATFORM=arduino:sam:arduino_due_x
