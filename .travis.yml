@@ -8,17 +8,31 @@ before_install:
   - sudo mv arduino-1.6.5 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
-  - ls
   - ln -s $PWD /usr/local/share/arduino/libraries/MicroDebug
 script:
-  - arduino --verify --board arduino:avr:uno $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
-  - arduino --verify --board arduino:avr:uno $PWD/examples/LedDebug/LedDebug.ino
-  - arduino --verify --board arduino:avr:uno $PWD/examples/SerialDebug/SerialDebug.ino
+  - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
+  - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/LedDebug/LedDebug.ino
+  - arduino --verify --board arduino:avr:${MODEL} $PWD/examples/SerialDebug/SerialDebug.ino
 notifications:
   email:
     on_success: change
     on_failure: change
-
+env:
+ - MODEL=uno
+ - MODEL=yun
+ - MODEL=diecimila
+ - MODEL=nano
+ - MODEL=mega
+ - MODEL=megaADK
+ - MODEL=leonardo
+ - MODEL=micro
+ - MODEL=esplora
+ - MODEL=mini
+ - MODEL=ethernet
+ - MODEL=bt
+ - MODEL=lilypad
+ - MODEL=pro
+ - MODEL=gemma
 #notifications:
 #  email:
 #  - rlogiacco@gmail.com
