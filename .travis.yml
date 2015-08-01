@@ -1,12 +1,23 @@
 language: c
 before_install:
- - sudo apt-get update -qq
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
+  - sleep 3
+  - export DISPLAY=:1.0
+  - wget http://downloads.arduino.cc/arduino-1.6.5-linux64.tar.xz
+  - tar xf arduino-1.6.5-linux64.tar.xz
+  - sudo mv arduino-1.6.5 /usr/local/share/arduino
+  - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
- - sudo apt-get install -qq gcc-avr binutils-avr avr-libc
-script: 
- - make MCU=atmega32 TARGET=LedDebug
- - make MCU=atmega32 TARGET=SerialDebug
- - make MCU=atmega32 TARGET=FormattingSerialDebug
+  - ln -s $PWD /usr/local/share/arduino/libraries/MicroDebug
+  - arduino --install-library "MicroDebug"
+script:
+  - arduino --verify --board arduino:avr:uno $PWD/examples/FormattingSerialDebug/FormattingSerialDebug.ino
+  - arduino --verify --board arduino:avr:uno $PWD/examples/LedDebug/LedDebug.ino
+  - arduino --verify --board arduino:avr:uno $PWD/examples/SerialDebug/SerialDebug.ino
+notifications:
+  email:
+    on_success: change
+    on_failure: change
 
 #notifications:
 #  email:
