@@ -20,8 +20,6 @@
 #ifndef __SERIAL_DEBUG__
 #define __SERIAL_DEBUG__
 
-    #define FREE_RAM (uint16_t)(RAMEND - size_t (__malloc_heap_start))
-
     #if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
 
         #ifndef SERIAL_DEBUG_IMPL
