@@ -8,6 +8,15 @@ Whenever you run your projects you want to have some feedback of what's happenin
 
 This library provides some means of easily handle this situation, exposing some pre-processor macro directives you can easily turn off to completely remove debug statements and save program memory.
 
+<!-- toc -->
+
+- [Serial interface](#serial-interface)
+  * [Basic Serial](#basic-serial)
+  * [Formatting Serial](#formatting-serial)
+- [LED interface](#led-interface)
+
+<!-- tocstop -->
+
 Serial interface
 ============
 
