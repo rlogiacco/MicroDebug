@@ -14,6 +14,7 @@ This library provides some means of easily handle this situation, exposing some 
   * [Basic Serial](#basic-serial)
   * [Formatting Serial](#formatting-serial)
 - [LED interface](#led-interface)
+- [Known Issues](#known-issues)
 
 <!-- tocstop -->
 
@@ -118,3 +119,8 @@ void loop() {
   delay(5000);
 }
 ```
+
+Known Issues
+============
+
+On `ESP8266` devices the `FormattingSerialDebug` implementation is unable to correctly print **floating point numbers**; the inability is due to a limitation in the `printf()` function implementation for the device, as [documented here](https://github.com/esp8266/Arduino/issues/73).
