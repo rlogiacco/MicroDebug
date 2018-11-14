@@ -1,6 +1,6 @@
 ### &#x26A0; **IMPORTANT**
  
-> Please, for support requests use the [MicroDebug Forum](https://arduinolibs.freeflarum.com/t/microdebug), running a search before submitting a new case: do not abuse the Github issue tracker.
+> Please, for support requests use [Arduino StackExchange](https://arduino.stackexchange.com/questions/tagged/microdebug-lib), ensuring to add the `microdebug-lib` tag to your question: do not abuse the Github issue tracker.
 
 MicroDebug [![Build Status][travis-status]][travis]
 =============
