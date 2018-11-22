@@ -18,7 +18,8 @@
 #include <FormattingSerialDebug.h>
 
 #if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
-int _serialDebug(char c, FILE * file) {
+
+int _serialDebug(char c, __attribute__ ((unused)) FILE * file) {
 	SERIAL_DEBUG_IMPL.write(c);
 	return c;
 }

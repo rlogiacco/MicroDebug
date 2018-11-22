@@ -20,6 +20,7 @@
 #define __SERIAL_DEBUG__
 
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
+		#pragma message("FormattingSerialDebug ENABLED")
         #include <Arduino.h>
         #include <stdio.h>
 
@@ -48,12 +49,18 @@
         #ifdef F
         void printf(const __FlashStringHelper *format, ...);
         #endif
-
+		#if defined (__AVR__)
         #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
+		#endif
 
-        #define DEBUG(format, ...) printf(format, ##__VA_ARGS__);SERIAL_DEBUG_IMPL.println()
+        #ifdef ESP8266
+		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);SERIAL_DEBUG_IMPL.setDebugOutput(true);
+		#endif
+
+		#define DEBUG(format, ...) printf(format "\n", ##__VA_ARGS__)
 
     #else
+		#pragma message("FormattingSerialDebug DISABLED")
         #define DEBUG(format, ...)
         #define SERIAL_DEBUG_SETUP(speed)
     #endif // SERIAL_DEBUG
