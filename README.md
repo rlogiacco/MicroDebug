@@ -29,6 +29,8 @@ The simplest and most used way of interfacing to Arduino or other microcontrolle
 
 There are two versions of this interface: a very basic one (`SerialDebug`) which uses a separator pattern and a more evolved one (`FormattingSerialDebug`) providing format capabilities through `printf` function. You should prefer the latter whenever you have access to `printf`, usually available through `stdio.h`.
 
+Please also note both serial implementations support the use of the `F()` and `FPSTR()` macros to reduce the RAM usage whenever necessary by using `PROGMEM` to store strings. I believe [this page](https://arduino-esp8266.readthedocs.io/en/latest/PROGMEM.html) documents pretty clearly those macros and applies to both Arduino and ESP8266.
+
 Basic Serial
 ------------
 
