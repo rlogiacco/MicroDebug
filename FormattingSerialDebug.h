@@ -45,19 +45,23 @@
         #ifndef SERIAL_DEBUG_IMPL
             #define SERIAL_DEBUG_IMPL Serial
         #endif
-        int _serialDebug(char c, FILE * file);
+
         #ifdef F
         void printf(const __FlashStringHelper *format, ...);
         #endif
-		#if defined (__AVR__)
+
+        #if defined (__AVR__)
+        int _serialDebug(char c, FILE * file);
         #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
+		#define DEBUG(format, ...) printf(format, ##__VA_ARGS__); SERIAL_DEBUG_IMPL.println()
 		#endif
 
         #ifdef ESP8266
-		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);SERIAL_DEBUG_IMPL.setDebugOutput(true);
+		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed)
+        #define DEBUG(format, ...) printf(format, ##__VA_ARGS__); fflush(stdout); SERIAL_DEBUG_IMPL.println()
 		#endif
 
-		#define DEBUG(format, ...) printf(format "\n", ##__VA_ARGS__)
+
 
     #else
 		#pragma message("FormattingSerialDebug DISABLED")
