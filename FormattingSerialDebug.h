@@ -20,7 +20,7 @@
 #define __SERIAL_DEBUG__
 
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
-		#pragma message("FormattingSerialDebug ENABLED")
+		#pragma message("MicroDebug ENABLED")
         #include <Arduino.h>
         #include <stdio.h>
 
@@ -50,21 +50,26 @@
         void printf(const __FlashStringHelper *format, ...);
         #endif
 
-        #if defined (__AVR__)
+        #ifdef ARDUINO_ARCH_AVR
         int _serialDebug(char c, FILE * file);
         #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 		#define DEBUG(format, ...) printf(format, ##__VA_ARGS__); SERIAL_DEBUG_IMPL.println()
 		#endif
 
-        #ifdef ESP8266
+        #ifdef ARDUINO_ARCH_ESP8266
 		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed)
         #define DEBUG(format, ...) printf(format, ##__VA_ARGS__); fflush(stdout); SERIAL_DEBUG_IMPL.println()
 		#endif
 
+		#if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32F4)
+		#pragma message("MicroDebug DISABLED: FormattingSerial not implemented on STM32 architecture")
+        #define DEBUG(format, ...)
+        #define SERIAL_DEBUG_SETUP(speed)
+		#endif
 
 
     #else
-		#pragma message("FormattingSerialDebug DISABLED")
+		#pragma message("MicroDebug DISABLED")
         #define DEBUG(format, ...)
         #define SERIAL_DEBUG_SETUP(speed)
     #endif // SERIAL_DEBUG
