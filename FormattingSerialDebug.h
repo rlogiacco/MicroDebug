@@ -16,8 +16,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SERIAL_DEBUG__
-#define __SERIAL_DEBUG__
+#ifndef SERIAL_DEBUG_H_
+#define SERIAL_DEBUG_H_
 
     #if (defined ARDUINO && (!defined(SERIAL_DEBUG) || SERIAL_DEBUG))
 		#pragma message("MicroDebug ENABLED")
@@ -73,4 +73,4 @@
         #define DEBUG(format, ...)
         #define SERIAL_DEBUG_SETUP(speed)
     #endif // SERIAL_DEBUG
-#endif //__SERIAL_DEBUG__
+#endif // SERIAL_DEBUG_H_

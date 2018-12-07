@@ -16,8 +16,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LED_DEBUG__
-#define __LED_DEBUG__
+#ifndef LED_DEBUG_H_
+#define LED_DEBUG_H_
 
     #if (!defined(LED_DEBUG) || LED_DEBUG)
 
@@ -33,7 +33,7 @@
             #define LED_DEBUG_LENGHT 	125
         #endif
 
-        #define __PULSE_LNG(NUM, LENGHT)  for(int __led_debug_count = 0; __led_debug_count < NUM; __led_debug_count++) {\
+        #define PULSE_LNG_(NUM, LENGHT)  for(int __led_debug_count = 0; __led_debug_count < NUM; __led_debug_count++) {\
                                             digitalWrite(LED_DEBUG_PIN, HIGH);\
                                             delay(LENGHT);\
                                             digitalWrite(LED_DEBUG_PIN, LOW);\
@@ -41,22 +41,22 @@
                                           }\
                                           delay(LED_DEBUG_DELAY)
         
-        #define __PULSE_DEF(NUM)          __PULSE_LNG(NUM, LED_DEBUG_LENGHT)
+        #define PULSE_DEF_(NUM)          PULSE_LNG_(NUM, LED_DEBUG_LENGHT)
         
-        #define __PULSE_ONE()             digitalWrite(LED_DEBUG_PIN, HIGH);\
+        #define PULSE_ONE_()             digitalWrite(LED_DEBUG_PIN, HIGH);\
                                           delay(LED_DEBUG_LENGHT);\
                                           digitalWrite(LED_DEBUG_PIN, LOW);\
                                           delay(LED_DEBUG_LENGHT);\
                                           delay(LED_DEBUG_DELAY)
 
-        #define __PULSE_X(x,NUM,LENGHT,MACRO, ...) pinMode(LED_DEBUG_PIN, OUTPUT);MACRO
+        #define PULSE_X_(x,NUM,LENGHT,MACRO, ...) pinMode(LED_DEBUG_PIN, OUTPUT);MACRO
 
-        #define PULSE(...)                __PULSE_X(,##__VA_ARGS__,\
-                                            __PULSE_LNG(__VA_ARGS__),\
-                                            __PULSE_DEF(__VA_ARGS__),\
-                                            __PULSE_ONE(__VA_ARGS__)\
+        #define PULSE(...)                PULSE_X_(,##__VA_ARGS__,\
+                                            PULSE_LNG_(__VA_ARGS__),\
+                                            PULSE_DEF_(__VA_ARGS__),\
+                                            PULSE_ONE_(__VA_ARGS__)\
                                           )
     #else
         #define PULSE(...)
     #endif
-#endif // __LED_DEBUG__
+#endif // LED_DEBUG_H_

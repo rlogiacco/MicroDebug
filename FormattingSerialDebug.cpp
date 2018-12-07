@@ -36,11 +36,7 @@ void printf(const __FlashStringHelper *format, ...) {
 	char buffer[256];
 	va_list args;
 	va_start(args, format);
-	#if defined(ARDUINO_ARCH_STM32F4) || defined(ARDUINO_ARCH_STM32F3) || defined(ARDUINO_ARCH_STM32F2) || defined(ARDUINO_ARCH_STM32F1)
-	vsnprintf(buffer, sizeof(buffer), (const char *)format, args);
-	#else
-	vsnprintf_P(buffer, sizeof(buffer), (const char *)format, args); // progmem for AVR
-	#endif
+	vsnprintf_P(buffer, sizeof(buffer), (const char *)format, args); // support for format string in program memory
 	va_end(args);
 	SERIAL_DEBUG_IMPL.print(buffer);
 }
