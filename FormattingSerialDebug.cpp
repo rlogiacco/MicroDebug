@@ -18,17 +18,11 @@
 #include <FormattingSerialDebug.h>
 
 #if (!defined(SERIAL_DEBUG) || SERIAL_DEBUG)
-#if defined(ARDUINO_ARCH_AVR)
+#ifdef ARDUINO_ARCH_AVR
 int _serialDebug(char c, __attribute__ ((unused)) FILE * file) {
 	SERIAL_DEBUG_IMPL.write(c);
 	return c;
 }
-#endif
-
-#if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32F4)
-// Still looking for a valid implementation
-#endif
-
 
 #ifdef F
 #include <stdarg.h>
@@ -40,5 +34,14 @@ void printf(const __FlashStringHelper *format, ...) {
 	va_end(args);
 	SERIAL_DEBUG_IMPL.print(buffer);
 }
-#endif
+#endif /* F */
+#endif /* ARDUINO_ARCH_AVR */
+
+#if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32F4)
+// Still looking for a valid implementation
+/* int fputc(int c, __attribute__ ((unused)) FILE *f) {
+	SERIAL_DEBUG_IMPL.write(c);
+	return c;
+}*/
+#endif /* ARDUINO_ARCH_STM32 */
 #endif
