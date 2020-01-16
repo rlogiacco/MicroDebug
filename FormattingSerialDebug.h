@@ -25,10 +25,10 @@
         #include <stdio.h>
 
 /*
- * d, i	int as a signed decimal number. '%d' and '%i' are synonymous for output, but are different when used with scanf() for input (where using %i will interpret a number as hexadecimal if it's preceded by 0x, and octal if it's preceded by 0.)
+ * d, i	int as a signed decimal number.
  * u	decimal unsigned int.
  * l	long as a signed decimal number.
- * ul	decimal unsigned long.
+ * lu	decimal unsigned long.
  * f, F	double in normal (fixed-point) notation. 'f' and 'F' only differs in how the strings for an infinite number or NaN are printed ('inf', 'infinity' and 'nan' for 'f', 'INF', 'INFINITY' and 'NAN' for 'F').
  * e, E	double value in standard form ([-]d.ddd e[+/-]ddd). An E conversion uses the letter E (rather than e) to introduce the exponent. The exponent always contains at least two digits; if the value is zero, the exponent is 00. In Windows, the exponent contains three digits by default, e.g. 1.5e002, but this can be altered by Microsoft-specific _set_output_format function.
  * g, G	double in either normal or exponential notation, whichever is more appropriate for its magnitude. 'g' uses lower-case letters, 'G' uses upper-case letters. This type differs slightly from fixed-point notation in that insignificant zeroes to the right of the decimal point are not included. Also, the decimal point is not included on whole numbers.
@@ -46,27 +46,20 @@
             #define SERIAL_DEBUG_IMPL Serial
         #endif
 
-        #ifdef F
-        void printf(const __FlashStringHelper *format, ...);
-        #endif
-
         #ifdef ARDUINO_ARCH_AVR
-        int _serialDebug(char c, FILE * file);
+		int _serialDebug(char c, FILE * file);
         #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
 		#define DEBUG(format, ...) printf(format, ##__VA_ARGS__); SERIAL_DEBUG_IMPL.println()
-		#endif
+		#ifdef F
+        void printf(const __FlashStringHelper *format, ...);
+        #endif
+        #endif
 
-        #ifdef ARDUINO_ARCH_ESP8266
+        #if defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32F4)
+        #pragma message("MicroDebug DISABLED: FormattingSerial not implemented on your architecture")
 		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed)
         #define DEBUG(format, ...) printf(format, ##__VA_ARGS__); fflush(stdout); SERIAL_DEBUG_IMPL.println()
 		#endif
-
-		#if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32F4)
-		#pragma message("MicroDebug DISABLED: FormattingSerial not implemented on STM32 architecture")
-        #define DEBUG(format, ...)
-        #define SERIAL_DEBUG_SETUP(speed)
-		#endif
-
 
     #else
 		#pragma message("MicroDebug DISABLED")
