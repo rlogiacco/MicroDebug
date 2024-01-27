@@ -5,6 +5,9 @@
 // Set the following if you wish to override the default
 #define SERIAL_DEBUG_SEPARATOR ", "
 
+#ifndef A0 // esp32 doesn't define analog pins
+#define A0 32
+#endif
 
 void setup() {
 	SERIAL_DEBUG_SETUP(9600);
