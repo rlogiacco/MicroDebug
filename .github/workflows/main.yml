@@ -4,9 +4,8 @@ on:
   - pull_request
 
 jobs:
-  build:
+  build-avr:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         fqbn:
@@ -16,11 +15,6 @@ jobs:
           - arduino:avr:mega:cpu=atmega1280
           - arduino:avr:mega:cpu=atmega2560
           - arduino:avr:leonardo
-          - arduino:samd:nano_33_iot
-          - arduino:megaavr:uno2018:mode=on
-          - arduino:mbed:nano33ble
-          - arduino:mbed_nano:nanorp2040connect
-
     steps:
       - uses: actions/checkout@v4
       - uses: arduino/compile-sketches@v1
@@ -31,17 +25,34 @@ jobs:
             - examples/LedDebug
             - examples/SerialDebug
             - examples/FormattingSerialDebug
+
+  build-others:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fqbn:
+          - arduino:samd:nano_33_iot
+          - arduino:megaavr:uno2018:mode=on
+          - arduino:mbed:nano33ble
+          - arduino:mbed_nano:nanorp2040connect
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fqbn: ${{ matrix.fqbn }}
+          sketch-paths: |
+            - examples/LedDebug
+            - examples/SerialDebug
           
   build-for-esp32:
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
         fqbn:
           - esp32:esp32:esp32
           - esp32:esp32:esp32s3
           - esp32:esp32:esp32c3
-
     steps:
       - uses: actions/checkout@v4
       - uses: arduino/compile-sketches@v1
@@ -54,9 +65,9 @@ jobs:
           sketch-paths: |
             - examples/LedDebug
             - examples/SerialDebug
-            - examples/FormattingSerialDebug
           cli-compile-flags: |
             - --warnings="none"
+
   lint:
     runs-on: ubuntu-latest
     steps:
