@@ -5,15 +5,12 @@
 // Set the following if you wish to override the default
 #define SERIAL_DEBUG_SEPARATOR ", "
 
-int free() {
-	extern int __heap_start, *__brkval;
-	int v;
-	return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
-}
+#ifndef A0 // esp32 doesn't define analog pins
+#define A0 32
+#endif
 
 void setup() {
 	SERIAL_DEBUG_SETUP(9600);
-	DEBUG("Available memory", free());
 	pinMode(A0, INPUT);
 }
 
