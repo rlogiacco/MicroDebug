@@ -47,18 +47,22 @@
         #endif
 
         #ifdef ARDUINO_ARCH_AVR
-		int _serialDebug(char c, FILE * file);
-        #define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
-		#define DEBUG(format, ...) printf(format, ##__VA_ARGS__); SERIAL_DEBUG_IMPL.println()
-		#ifdef F
-        void printf(const __FlashStringHelper *format, ...);
-        #endif
+			int _serialDebug(char c, FILE * file);
+        	#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed);fdevopen( &_serialDebug, 0 )
+			#define DEBUG(format, ...) printf(format, ##__VA_ARGS__); SERIAL_DEBUG_IMPL.println()
+			#ifdef F
+        		void printf(const __FlashStringHelper *format, ...);
+        	#endif
         #endif
 
         #if defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32F4)
-        #pragma message("MicroDebug DISABLED: FormattingSerial not implemented on your architecture")
-		#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed)
-        #define DEBUG(format, ...) printf(format, ##__VA_ARGS__); fflush(stdout); SERIAL_DEBUG_IMPL.println()
+			#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed)
+        	#define DEBUG(format, ...) printf(format, ##__VA_ARGS__); fflush(stdout); SERIAL_DEBUG_IMPL.println()
+		#endif
+
+		#if defined(ARDUINO_ARCH_ESP32)
+        	#define SERIAL_DEBUG_SETUP(speed) SERIAL_DEBUG_IMPL.begin(speed)
+			#define DEBUG(format, ...) SERIAL_DEBUG_IMPL.printf(format, ##__VA_ARGS__); SERIAL_DEBUG_IMPL.println();
 		#endif
 
     #else
